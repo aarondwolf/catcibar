@@ -26,6 +26,7 @@
 {synopt:{opth cil:evel(real)}}Set the confidence level for a two-way test. Default is 95.{p_end}
 {synopt:{opt nl:abel}}Prints the number of observations in each {opt o:ver} group. Only works if the number of observations per group is constant over.{p_end}
 {synopt:{opth wrapx:lab(integer)}}Wrap x-axis labels at after each Nth character (after a full word). Default is 20.{p_end}
+{synopt:{opt cw}}Calculate means and confidence intervals casewise. Default is to drop all observations where any observations of {it:varlist}, {it:over}, or {it:by(varlist)} are missing.{p_end}
 {synopt:{opt {help twoway_options}}}titles, legends, axes, added lines and text, by, regions, name, aspectratio, etc.{p_end}
 {synopt:{opt nop:reserve}}Do not {help preserve} current dataset. Useful for debugging.{p_end}
 {synopt:{opt n:oisily}}Display result of {help proportion} or {help mean} command. Useful for debugging.{p_end}

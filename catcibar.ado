@@ -5,7 +5,7 @@ cap program drop catcibar
 program define catcibar, rclass
 	
 	version 13
-	syntax varlist [if] , 	[Over(varname numeric) by(passthru) CILevel(real 95) PERcent PROPortion WRAPXlab(integer 20) NLabel MEAN Noisily Colors(string) noPREserve CIOpts(string asis) *]
+	syntax varlist [if] , 	[Over(varname numeric) by(passthru) CW CILevel(real 95) PERcent PROPortion WRAPXlab(integer 20) NLabel MEAN Noisily Colors(string) noPREserve CIOpts(string asis) *]
 	
 	* Ensure varlist is varname if proportion specified
 	cap assert wordcount("`varlist'") == 1 if "`proportion'" == "proportion"
@@ -28,7 +28,8 @@ qui {
 if "`preserve'" != "nopreserve" preserve
 
 	* Drop if any groups are missing
-	foreach var of varlist `varlist' `over' `byvars' {
+	if "`cw'" == "" local droplist `varlist'
+	foreach var of varlist `droplist' `over' `byvars' {
 	    drop if mi(`var')
 	}
 	
@@ -89,8 +90,8 @@ if "`preserve'" != "nopreserve" preserve
 	* Confidence intervals 1 - `ci'/2
 	bysort varname: egen N = sum(count)
 	local pvalue = (100-`cilevel')/200
-	gen ll = mean - invttail(N-1,`pvalue')*semean
-	gen ul = mean + invttail(N-1,`pvalue')*semean	
+	gen ll = mean - invttail(N-1,`pvalue')*semean if semean != 0
+	gen ul = mean + invttail(N-1,`pvalue')*semean if semean != 0	
 		
 	* Calculate barwidth
 	levelsof `over', local(overlevels)
