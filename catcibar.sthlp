@@ -8,7 +8,7 @@
 {title:Syntax}
 
 {p 8 17 2}
-{opt catbar}
+{opt catcibar}
 { {varlist} | {varname} }
 [{help if}] {cmd:,} [options]
 

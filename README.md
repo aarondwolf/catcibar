@@ -12,14 +12,14 @@ net install catcibar, from("https://aarondwolf.github.io/catcibar")
 ## Syntax
 
 ```
-    catbar { varlist | varname } [if] , [options]
+    catcibar { varlist | varname } [if] , [options]
 ```
 
 
 
 Options
 -----------------------------------------------------------------------------------------------
- 
+
 
 | Option                | Description                                                  |
 | --------------------- | ------------------------------------------------------------ |
