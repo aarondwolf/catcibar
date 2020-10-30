@@ -1,4 +1,4 @@
-*! version 1.0.2  27oct2020 Aaron Wolf, aaron.wolf@yale.edu
+*! version 1.0.3  27oct2020 Aaron Wolf, aaron.wolf@yale.edu
 //	Program for making bar graphs with CIs based on prop: commands
 *set trace on
 cap program drop catcibar
@@ -29,9 +29,12 @@ if "`preserve'" != "nopreserve" preserve
 
 	* Drop if any groups are missing
 	if "`cw'" == "" local droplist `varlist'
-	foreach var of varlist `droplist' `over' `byvars' {
-	    drop if mi(`var')
+	if "`droplist' `over' `byvars'" != "" {
+		foreach var of varlist `droplist' `over' `byvars' {
+			drop if mi(`var')
+		}
 	}
+	local obs = `=_N'
 	
 	* Create "over" variable if missing
 	if "`over'" == "" {
@@ -164,6 +167,7 @@ if "`preserve'" != "nopreserve" restore
 	if "`byvars'" != "" return local by `byvars'
 	return scalar pvalue = `pvalue'
 	return local label `xlab'
+	return scalar N = `obs'
 
 end	
 
