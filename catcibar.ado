@@ -163,6 +163,7 @@ if "`preserve'" != "nopreserve" restore
 	return local over		`over'
 	if "`byvars'" != "" return local by `byvars'
 	return scalar pvalue = `pvalue'
+	return local label `xlab'
 
 end	
 
