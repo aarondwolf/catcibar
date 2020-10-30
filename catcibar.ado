@@ -29,7 +29,7 @@ if "`preserve'" != "nopreserve" preserve
 
 	* Drop if any groups are missing
 	if "`cw'" == "" local droplist `varlist'
-	if "`droplist' `over' `byvars'" != "" {
+	if "`droplist'`over'`byvars'" != "" {
 		foreach var of varlist `droplist' `over' `byvars' {
 			drop if mi(`var')
 		}
