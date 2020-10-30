@@ -1,4 +1,4 @@
-*! version 1.0.1  27oct2020 Aaron Wolf, aaron.wolf@yale.edu
+*! version 1.0.2  27oct2020 Aaron Wolf, aaron.wolf@yale.edu
 //	Program for making bar graphs with CIs based on prop: commands
 *set trace on
 cap program drop catcibar

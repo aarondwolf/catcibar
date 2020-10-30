@@ -1,5 +1,5 @@
 {smcl}
-{* *! version 1.0.1 Aaron Wolf 27oct2020}{...}
+{* *! version 1.0.2 Aaron Wolf 27oct2020}{...}
 {title:Title}
 
 {phang}
@@ -35,19 +35,19 @@
 {title:Description}
 
 {pstd}
-{cmd:catcibar} generates summary statistics and confidence intervals for varlist, 
-and plots the resulting graph using twoway bar and twoway rcap. The varname 
-specified in {cmd:over(varname)} is used to graph bars of different colors, 
-one for each value of over. Each category of the specified varname 
-(if proportion is specified), or each variable in varlist is plotted as a 
+{cmd:catcibar} generates summary statistics and confidence intervals for varlist,
+and plots the resulting graph using twoway bar and twoway rcap. The varname
+specified in {cmd:over(varname)} is used to graph bars of different colors,
+one for each value of over. Each category of the specified varname
+(if proportion is specified), or each variable in varlist is plotted as a
 separate cluster of bars along the x-axis.
 
 {pstd}
-Any options not detailed in the above list will be passed directly to 
+Any options not detailed in the above list will be passed directly to
 {help twoway} when drawing the graph.
 
 {pstd}
-Graphs can be plotted by subgroup by specifying the *by()* option. This is 
+Graphs can be plotted by subgroup by specifying the *by()* option. This is
 passed directly to twoway as well.
 
 
@@ -55,16 +55,3 @@ passed directly to twoway as well.
 
 {pstd}Aaron Wolf, Yale University {p_end}
 {pstd}aaron.wolf@yale.edu{p_end}
-
-
-
-
-
-
-
-
-
-
-
-
-
