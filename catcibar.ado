@@ -149,7 +149,13 @@ if "`preserve'" != "nopreserve" preserve
 	}
 	
 	* % labels for proportion
-	if ("`percent'" == "percent") | ("`proportion'" == "proportion") mylabels 0(20)100, myscale(@/100) local(percent) suffix("%")
+	if ("`percent'" == "percent") | ("`proportion'" == "proportion") {
+		cap which mylabels
+			if _rc {
+				di as error "You must install mylabels from gr0092 to use the proportion/percent option: net describe gr0092"
+			}
+		mylabels 0(20)100, myscale(@/100) local(percent) suffix("%")
+	}
 		
 	* Legend on or off
 	if "`over'" ==  "`overvar'" local legend off

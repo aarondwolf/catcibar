@@ -9,6 +9,12 @@ The current version is still a work in progress. To install, user can use the ne
 net install catcibar, from("https://aarondwolf.github.io/catcibar")
 ```
 
+## Dependencies
+`catcibar` uses `mylabels`, by Nick Cox, when using the `proportion` or `percent` options. In Stata, to install the package, type in:
+```
+net sj 22-4 gr0092
+```
+
 ## Syntax
 
 ```
