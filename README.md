@@ -54,5 +54,5 @@ Graphs can be plotted by subgroup by specifying the *by()* option. This is passe
 
 ## Author
 
-Aaron Wolf, Yale University
-aaron.wolf@yale.edu
+Aaron Wolf, Northwestern University
+aaron.wolf@u.northwestern.edu

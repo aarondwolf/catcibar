@@ -1,5 +1,5 @@
 v 1.0.4
-d Created by Aaron Wolf (aaron.wolf@yale.edu)
+d Created by Aaron Wolf (aaron.wolf@u.northwestern.edu)
 
 d 	Installation instructions:
 d	net install catcibar, from("https://aarondwolf.github.io/catcibar/") replace
