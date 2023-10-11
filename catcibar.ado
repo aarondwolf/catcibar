@@ -1,17 +1,35 @@
-*! version 1.0.4  27oct2020 Aaron Wolf, aaron.wolf@u.northwestern.edu
+*! version 1.1.0  11oct2023 Aaron Wolf, aaron.wolf@u.northwestern.edu
 //	Program for making bar graphs with CIs based on prop: commands
 *set trace on
 cap program drop catcibar
 program define catcibar, rclass
 	
 	version 13
-	syntax varlist [if] , 	[Over(varname numeric) by(passthru) CW CILevel(real 95) PERcent PROPortion WRAPXlab(integer 20) NLabel MEAN Noisily Colors(string) noPREserve CIOpts(string asis) *]
+	syntax varlist [if] , 	[Over(varname numeric) by(passthru) CW CILevel(real 95) CIOpts(string asis) PERcent PROPortion WRAPXlab(integer 20) NLabel MEAN Noisily Colors(string) noPREserve ///
+							MLabel(namelist) MLABSTYyle(passthru) MLABPosition(passthru) MLABVposition(passthru) MLABGap(passthru) MLABANGle(passthru) MLABTextstyle(passthru) MLABSize(passthru) ///
+							MLABColor(passthru) MLABFormat(passthru)  *]
 	
 	* Ensure varlist is varname if proportion specified
 	cap assert wordcount("`varlist'") == 1 if "`proportion'" == "proportion"
 	if _rc {
 	    di as error "Only one variable can be specified if {it: proportion} specified."
 		error 197
+	}
+
+	* Ensure mlab contains only mean, ll, or ul
+	cap assert inlist("`mlabel'","mean","ll","ul") if "`mlabel'" != ""
+	if _rc {
+	    di as error "mlabel must be one of mean, lb, or ub"
+		error 197
+	}
+	* Otherwise if the rest of the options are non-missing, set marker_labels
+	else if "`mlabstyle'`mlabposition'`mlabvposition'`mlabgap'`mlabangle'`mlabtextstyle'`mlabsize'`mlabcolor'`mlabformat'" != ""  {
+		local mlabel_final = cond("`mlabel'" == "", "mean", "`mlabel'")
+		local marker_labels mlabel(`mlabel_final') `mlabstyle' `mlabposition' `mlabvposition' `mlabgap' `mlabangle' `mlabtextstyle' `mlabsize' `mlabcolor' `mlabformat'
+	}
+	* Otherwise if all of the options are missing, set marker_labels off
+	else {
+		local marker_labels ""
 	}
 	
 	* Get varlist from by
@@ -145,7 +163,7 @@ if "`preserve'" != "nopreserve" preserve
 	* Draw Graphs
 	forvalues i = 1/`levels' {
 		local color: word `i' of `colors'
-		local bars `bars' (bar mean x if over == `i', barw(`bw') color(`color'))	
+		local bars `bars' (bar mean x if over == `i', barw(`bw') color(`color') `marker_labels')	
 	}
 	
 	* % labels for proportion

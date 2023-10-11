@@ -38,8 +38,10 @@ Options
 | cilevel(real)         | Set the confidence level for a two-way test. Default is 95.  |
 | nlabel                | Prints the number of observations in each over group. Only works if the  number of observations per group is constant over. |
 | wrapxlab(integer)     | Wrap x-axis labels at after each Nth character (after a full word). Default  is 20. |
-| twoway_options        | titles, legends, axes, added lines and text, by, regions, name, aspectratio,  etc. |
 | nopreserve            | Do not preserve current dataset. Useful for debugging.       |
+| marker_label_options  | Optional labels for bar or confidence intervals. Note: {opt ml:abel()} must be one of *mean*, *ll*, or *ul*. **catcibar** will throw an error otherwise. All other options are as specified in marker_label_options, and will be passed directly to each bar.             |
+| twoway_options        | titles, legends, axes, added lines and text, by, regions, name, aspectratio, etc. Any options not in the above list will be passed directly to **twoway** exactly as input. |
+
 
  
 

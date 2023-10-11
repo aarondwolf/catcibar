@@ -27,9 +27,11 @@
 {synopt:{opt nl:abel}}Prints the number of observations in each {opt o:ver} group. Only works if the number of observations per group is constant over.{p_end}
 {synopt:{opth wrapx:lab(integer)}}Wrap x-axis labels at after each Nth character (after a full word). Default is 20.{p_end}
 {synopt:{opt cw}}Calculate means and confidence intervals casewise. Default is to drop all observations where any observations of {it:varlist}, {it:over}, or {it:by(varlist)} are missing.{p_end}
-{synopt:{opt {help twoway_options}}}titles, legends, axes, added lines and text, by, regions, name, aspectratio, etc.{p_end}
 {synopt:{opt nop:reserve}}Do not {help preserve} current dataset. Useful for debugging.{p_end}
 {synopt:{opt n:oisily}}Display result of {help proportion} or {help mean} command. Useful for debugging.{p_end}
+{synopt:{opt {help marker_label_options}}}Optional labels for bar or confidence intervals. Note: {opt ml:abel()} must be one of {it: mean}, {it: ll}, or {it: ul}. 
+        {cmd:catcibar} will throw an error otherwise. All other options are as specified in {help marker_label_options}, and will be passed directly to each bar. {p_end}
+{synopt:{opt {help twoway_options}}}titles, legends, axes, added lines and text, by, regions, name, aspectratio, etc. Any options not in the above list will be passed directly to {help twoway} exactly as input.{p_end}
 {synoptline}
 
 {title:Description}
