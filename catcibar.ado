@@ -1,4 +1,4 @@
-*! version 1.1.0  11oct2023 Aaron Wolf, aaron.wolf@u.northwestern.edu
+*! version 1.1.1  12oct2023 Aaron Wolf, aaron.wolf@u.northwestern.edu
 //	Program for making bar graphs with CIs based on prop: commands
 *set trace on
 cap program drop catcibar
@@ -6,7 +6,7 @@ program define catcibar, rclass
 	
 	version 13
 	syntax varlist [if] , 	[Over(varname numeric) by(passthru) CW CILevel(real 95) CIOpts(string asis) PERcent PROPortion WRAPXlab(integer 20) NLabel MEAN Noisily Colors(string) noPREserve ///
-							MLabel(namelist) MLABSTYyle(passthru) MLABPosition(passthru) MLABVposition(passthru) MLABGap(passthru) MLABANGle(passthru) MLABTextstyle(passthru) MLABSize(passthru) ///
+							MLabel(passthru) MLABSTYyle(passthru) MLABPosition(passthru) MLABVposition(passthru) MLABGap(passthru) MLABANGle(passthru) MLABTextstyle(passthru) MLABSize(passthru) ///
 							MLABColor(passthru) MLABFormat(passthru)  *]
 	
 	* Ensure varlist is varname if proportion specified
@@ -16,20 +16,17 @@ program define catcibar, rclass
 		error 197
 	}
 
+	* remove all spaces from mlabel
+	local mlabel: subinstr local mlabel " " "", all
+
 	* Ensure mlab contains only mean, ll, or ul
-	cap assert inlist("`mlabel'","mean","ll","ul") if "`mlabel'" != ""
+	cap assert inlist("`mlabel'","mlabel(mean)","mlabel(ll)","mlabel(ul)") if "`mlabel'" != ""
 	if _rc {
 	    di as error "mlabel must be one of mean, lb, or ub"
 		error 197
 	}
-	* Otherwise if the rest of the options are non-missing, set marker_labels
-	else if "`mlabstyle'`mlabposition'`mlabvposition'`mlabgap'`mlabangle'`mlabtextstyle'`mlabsize'`mlabcolor'`mlabformat'" != ""  {
-		local mlabel_final = cond("`mlabel'" == "", "mean", "`mlabel'")
-		local marker_labels mlabel(`mlabel_final') `mlabstyle' `mlabposition' `mlabvposition' `mlabgap' `mlabangle' `mlabtextstyle' `mlabsize' `mlabcolor' `mlabformat'
-	}
-	* Otherwise if all of the options are missing, set marker_labels off
 	else {
-		local marker_labels ""
+		local marker_labels `mlabel' `mlabstyle' `mlabposition' `mlabvposition' `mlabgap' `mlabangle' `mlabtextstyle' `mlabsize' `mlabcolor' `mlabformat'
 	}
 	
 	* Get varlist from by
